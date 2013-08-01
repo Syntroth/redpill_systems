@@ -3,7 +3,7 @@
 -
 &RACE.HUMAN #111=Human|3|3|3|3|3|3|2|20
 -
-&RACE.KILRATHI #111=Kilrathi|2|3|2|4|3|4|2|20
+&RACE.PROGRAM #111=Kilrathi|4|3|1|4|4|3|2|20
 -
 
 # ATTRIBUTES
@@ -28,9 +28,9 @@
 -
 &SKILL.ACROBATICS #111=Acrobatics|Athletic|1|||Used when attempting to perform any type of flips, somersaults, tightrope walking or other reasonably specialized feats of physical prowess. No default attribute as most of the feats covered by this skill require some minimum of professional training.
 -
-&SKILL.ANTIQUE-ARMS #111=Antique-Arms|Combat|1|||Knowledge and use of antiquated weaponry - anything more than 100 years old. Swords, polearms, and 20th & 21st century slugthrowers.
+&SKILL.ANTIQUE-ARMS #111=Antique-Arms|Combat|1|||Knowledge and use of antiquated weaponry - anything more than 100 years old. Swords, polearms, daggers, or spears are covered by this criteria.
 -
-&SKILL.ASTROGATION #111=Astrogation|Knowledge|0|REA|-2|Astrogation covers your ability to plot jumps between star systems. An individual with a high Astrogation skill has a knack for the complex calculations and an intuitive grasp of plotting accurate jumps quickly.
+&SKILL.OPERATION #111=Astrogation|Knowledge|0|REA|-2|Astrogation covers your ability to operate the connections of a crew from the Real World to the Matrix, find quick and good exits, and navigate through the Matrix information to efficiently help your team from the ship.
 -
 &SKILL.BATTLESUIT #111=Battlesuit|Combat|1|||Used when attempting to pilot a personal powered battlesuit. Includes the use of integrated weapon systems and knowing how to push the suit in combat to get the most out of it.
 -
