@@ -74,17 +74,11 @@
 -
 
 ## IC Time
-&ICTIME.FN #25=
-  setq(0,ifelse(inc(%0),%0,icsecs()))
-  [setq(1,convsecs(%q0))]
-  [ifelse(
-    gte(%q0,0),
-    extract(%q1,1,4) [add(last(%q1),760)],
-    #-1 ARGUMENT MUST BE POSITIVE INTEGER
-  )]
+# For Red Pill MUSH, IC time = RL time
+&ICTIME.FN #25=time()
 -
 
-&ICSECS.FN #25=mul(sub(secs(),1320000000),3)
+&ICSECS.FN #25=secs()
 -
 
 
