@@ -5,7 +5,7 @@ module Shiprace
   MAX_RACERS = 10
   RACE_OBJ = "#639"
   RACE_CHAN = "100.00"
-  RACE_HANDLE = "ESRL Announcer"
+  RACE_HANDLE = "Race Announcer"
   RACE_TAKE = 0.15
   FILE_SHIPS = File.expand_path('./ships.txt', File.dirname(__FILE__))
   FILE_NAMES = File.expand_path('./names.txt', File.dirname(__FILE__))
@@ -24,7 +24,7 @@ module Shiprace
     unless position > 0
       racer = race.racers.shuffle.first
     else
-      return "> ".red + "Invalid racer.  Select between position 1 and #{race.racers.count}." unless racer = race.racers[position - 1]
+      return "> ".red + "Invalid racer. Select between position 1 and #{race.racers.count}." unless racer = race.racers[position - 1]
     end
     
     ticket = racer.tickets.create!(dbref: dbref, wager: wager)
@@ -35,7 +35,7 @@ module Shiprace
     wallet.save
 
     Logs.log_syslog("SHIPRACE","#{R.penn_name(R["enactor"])} purchased a race ticket with a #{wager}c wager.")
-    return "> ".green + "You placed a bet of #{wager}c on the #{racer.ship.name} piloted by #{racer.name}."
+    return "> ".green + "You placed a bet of #{wager}c on the #{racer.ship.name} rode by #{racer.name}."
   end
 
   def self.build_weights(skill)
@@ -103,7 +103,7 @@ module Shiprace
         racer = ship.racer
       end
       
-      p "#{racer.name} flying the #{ship.name}."
+      p "#{racer.name} riding the #{ship.name}."
     end
     
     return race
@@ -150,19 +150,19 @@ module Shiprace
     total_winnings = 0
     bank = Econ::Wallet.find_or_create_by(id: RACE_OBJ)
     
-    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"Welcome to the Enigma Sector Racing League!")
-    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"We have #{racers.length} competitors in tonight's race through the Damioyn System!  Use race/roster to check the roster!")
+    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"Welcome to the Genjitsu no Sekai Racing League!")
+    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"We have #{racers.length} competitors in tonight's race through Tokyo city!  Use race/roster to check the roster!")
     Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"3.. 2.. 1.. And they're off!")
-    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"As they pass Damioyn III, #{turn1.name} in the #{turn1.ship.name} is in the lead!")
-    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"#{turn2.name} in the #{turn2.ship.name} is leading the pack as they pass Damioyn VI!")
-    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"At the Damioyn VIII finish line, it's the #{victor.ship.name} piloted by #{victor.name}!")
+    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"As they pass Harajuku, #{turn1.name} in the #{turn1.ship.name} is in the lead!")
+    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"#{turn2.name} in the #{turn2.ship.name} is leading the pack as they pass Shinsen!")
+    Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"At the Sangenjaya finish line, it's the #{victor.ship.name} driven by #{victor.name}!")
     Comms.channel_emit(RACE_CHAN,RACE_HANDLE,"#{winners.length} winning tickets paid out at #{victor_odds.to_frac_odds} odds!")
 
     if winners.length > 0
       winning_players = winners.map { |winner| R.penn_name(winner.dbref) }.uniq
       Logs.log_syslog("SHIPRACE", "Completing race. #{winners.length} winners: #{winning_players.itemize}")
     else
-      Logs.log_syslog("SHIPRACE", "Completing race.  No winners.")
+      Logs.log_syslog("SHIPRACE", "Completing race. No winners.")
     end
     
     winners.each do |winner|
@@ -172,7 +172,7 @@ module Shiprace
       wallet.balance += winnings
       wallet.save
       total_winnings += winnings
-      R.mailsend(winner.dbref,"Ship Race Winner!/You won #{winnings} credits at #{victor_odds.to_frac_odds} odds in a ship race by betting on the #{victor.ship.name} piloted by #{victor.name}!")
+      R.mailsend(winner.dbref,"Ship Race Winner!/You won #{winnings} credits at #{victor_odds.to_frac_odds} odds in a bike race by betting on the #{victor.ship.name} driven by #{victor.name}!")
     end
     
     bank.balance += race.balance - total_winnings
